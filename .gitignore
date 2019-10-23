@@ -1,4 +1,5 @@
 # ignore all . folders but include . files
-.*/
 
+.vscode
+/.vscode
 test.js
