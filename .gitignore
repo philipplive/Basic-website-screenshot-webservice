@@ -1,9 +1,3 @@
 # ignore all . folders but include . files
 
-.vscode
-/.vscode
 /.vscode/
-test.js
-tt
-/tt
-/tt/
