@@ -2,7 +2,7 @@
 
 class Core {
 	constructor() {
-		console.log(); 
+		console.log();  
 	}
 }
 
