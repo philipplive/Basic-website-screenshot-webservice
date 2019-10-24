@@ -42,11 +42,11 @@ class Main {
 			
 			if(!/^http[a-z0-9äöü\-\.\/\:]+$/.test(parameter.url)){
 				res.writeHead(400, { 'Content-Type': 'text/plain' });
-				res.end('URL ungültig');
+				res.end('Url invalid');
 				return;	
 			}
 			
-			console.log('\x1b[36m%s\x1b[0m', 'Anfrage für ' + parameter.url); 
+			console.log('\x1b[36m%s\x1b[0m', 'Request for ' + parameter.url); 
 						
 			try {
 				let image =  await this.createScreenshot(parameter.url,parameter.width,parameter.height,parameter.zoom);
@@ -74,7 +74,8 @@ class Main {
 		let tempFile = os.tmpdir() + '/screenshot' + (Math.floor(Math.random() * 10000) + 1) + '.png';
 
 		await this.exec('"C:/Program Files (x86)/Google/Chrome/Application/chrome" --hide-scrollbars --headless --force-device-scale-factor=' + zoom + ' --log-level=1  --screenshot=' + tempFile + ' --window-size=' + width + ',' + height + ' ' + site);
-		console.log('\x1b[36m%s\x1b[0m', 'Temp-Bild ' + tempFile);
+		console.log('\x1b[36m%s\x1b[0m', 'Temp-Image ' + tempFile);
+
 		let image = await this.getImageData(tempFile);
 		fs.unlink(tempFile, function (err) {
 			if (err)
@@ -93,10 +94,7 @@ class Main {
 		return new Promise((resolve, reject) => {
 			let exec = require('child_process').exec;
 			
-			exec(cmd, (error, stdout, stderr) => {
-				console.log('stout: ' + stdout);
-				console.log('sterr: ' + stderr);
-				
+			exec(cmd, (error, stdout, stderr) => {				
 				if (error) 
 					return reject(error)
 				
