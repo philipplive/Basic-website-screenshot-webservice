@@ -33,13 +33,11 @@ class Command {
     prints() {
         let str = this.path;
 
-
         Object.keys(this.parameters).forEach((key) => {
             if (this.parameters[key])
                 str += ' ' + key + '=' + this.parameters[key];
             else
                 str += ' ' + key;
-
         });
 
         return str;
