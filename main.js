@@ -5,6 +5,7 @@ const url = require('url');
 const fs = require('fs');
 const cmd = require('child_process');
 const os = require('os');
+const Command = require('./command.js');
 
 /**
  * @class  Main
@@ -13,7 +14,7 @@ class Main {
 	constructor() {
 		this.startServer();
 	}
-	
+
 	/**
 	 * Start server
 	 */
@@ -27,42 +28,43 @@ class Main {
 
 		server.on('request', async (req, res) => {
 			let parameter = url.parse(req.url, true).query;
-			
-			if(parameter.secret != '123456'){
+
+			if (parameter.secret != '123456') {
 				res.writeHead(401, { 'Content-Type': 'text/plain' });
 				res.end('Wrong password');
 				return;
 			}
-			
-			if(!/^\d+$/.test(parameter.width) || !/^\d+$/.test(parameter.height) || !/^\d\.\d$/.test(parameter.zoom)){
+
+			if (!/^\d+$/.test(parameter.width) || !/^\d+$/.test(parameter.height) || !/^\d\.\d$/.test(parameter.zoom)) {
 				res.writeHead(400, { 'Content-Type': 'text/plain' });
 				res.end('Format of size or zoom are invalid');
-				return;	
+				return;
 			}
-			
-			if(!/^http[a-z0-9äöü\-\.\/\:]+$/.test(parameter.url)){
+
+			if (!/^http[a-z0-9äöü\-\.\/\:]+$/.test(parameter.url)) {
 				res.writeHead(400, { 'Content-Type': 'text/plain' });
 				res.end('Url invalid');
-				return;	
+				return;
 			}
-			
-			console.log('\x1b[36m%s\x1b[0m', 'Request for ' + parameter.url); 
-						
+
+			console.log('\x1b[36m%s\x1b[0m', 'Request for ' + parameter.url);
+
 			try {
-				let image =  await this.createScreenshot(parameter.url,parameter.width,parameter.height,parameter.zoom);
-				res.writeHead(200,{'content-type':'image/png'});
+				let image = await this.createScreenshot(parameter.url, parameter.width, parameter.height, parameter.zoom);
+				res.writeHead(200, { 'content-type': 'image/png' });
 				res.end(image);
 			}
 			catch (e) {
 				res.writeHead(500, { 'Content-Type': 'text/plain' });
 				res.end('Unknown error');
+				throw e;
 			}
 		});
-		
+
 		server.listen(5512);
 		console.log('\x1b[33m%s\x1b[0m', 'Start service on port 5512');
 	}
-	
+
 	/**
 	 * Create screenshot from website
 	 * @param {String} site Website url
@@ -70,18 +72,27 @@ class Main {
 	 * @param {Int} height Height
 	 * @returns {String} Image
 	 */
-	async createScreenshot (site, width, height, zoom) {
+	async createScreenshot(site, width, height, zoom) {
 		let tempFile = os.tmpdir() + '/screenshot' + (Math.floor(Math.random() * 10000) + 1) + '.png';
+		let cmd = new Command('"%programfiles(x86)%/Google/Chrome/Application/chrome"');
+		cmd.addParameter('--headless --hide-scrollbars');
+		cmd.addParameters({
+			 '--force-device-scale-factor': zoom,
+			 '--screenshot': tempFile,
+			 '--window-size': width + ',' + height,
+			 '--log-level': '1'
+		});
+		cmd.addParameter(site);
 
-		await this.exec('"C:/Program Files (x86)/Google/Chrome/Application/chrome" --hide-scrollbars --headless --force-device-scale-factor=' + zoom + ' --log-level=1  --screenshot=' + tempFile + ' --window-size=' + width + ',' + height + ' ' + site);
+		await this.exec(cmd.prints());
 		console.log('\x1b[36m%s\x1b[0m', 'Temp-Image ' + tempFile);
 
 		let image = await this.getImageData(tempFile);
 		fs.unlink(tempFile, function (err) {
 			if (err)
 				console.log('\x1b[31m', err);
-		}); 
-		
+		});
+
 		return image;
 	}
 
@@ -89,19 +100,19 @@ class Main {
 	 * Execute CMD
 	 * @param {String} cmd
 	 * @returns {Promies}
-	 */	
+	 */
 	exec(cmd) {
 		return new Promise((resolve, reject) => {
 			let exec = require('child_process').exec;
-			
-			exec(cmd, (error, stdout, stderr) => {				
-				if (error) 
+
+			exec(cmd, (error, stdout, stderr) => {
+				if (error)
 					return reject(error)
-				
-				if (stderr) 
+
+				if (stderr)
 					return reject(stderr)
-				
-				resolve(stdout? stdout : stderr);
+
+				resolve(stdout ? stdout : stderr);
 			});
 		});
 	}
@@ -110,13 +121,13 @@ class Main {
 	 * Get Image
 	 * @param {String} path Path to image
 	 * @returns {Promies}
-	 */	
-	getImageData(path){
-		return new Promise(function(resolve, reject){
+	 */
+	getImageData(path) {
+		return new Promise(function (resolve, reject) {
 			fs.readFile(path, (err, data) => {
 				err ? reject(err) : resolve(data);
 			});
-		});	
+		});
 	}
 }
 

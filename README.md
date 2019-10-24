@@ -9,9 +9,8 @@ node .\main.js
 
 Open your browser and connect to the service with all parameters:
 ```
-https://[[SERVICE-IP]]:5512/?url=http://thewebsite.ch/&width=1500&height=1500&secret=123456&zoom=0.1
+https://[[SERVICE-IP]]:5512/?url=http://hostfactory.ch/&width=1500&height=1500&secret=123456&zoom=0.1
 ```
-
 You should get the folowing output:
 ![Open the URL in a browser](preview.jpg)
 
