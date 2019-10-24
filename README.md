@@ -1,9 +1,10 @@
 # Basic website screenshot webservice
 
+
 ## Usage example
 Start the web-service in the CMD:
 ```
-node C:\Users\Administrator\Desktop\imageservice\test.js
+node C:\Users\Administrator\Desktop\imageservice\main.js
 ```
 
 Open your browser and connect to the service with all parameters:
