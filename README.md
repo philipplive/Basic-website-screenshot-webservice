@@ -4,7 +4,7 @@ Node.js script for start a simple webservice to taking screenshots of a website.
 ## Usage example
 Start the web-service in the CMD:
 ```
-node C:\Users\Administrator\Desktop\imageservice\main.js
+node .\main.js
 ```
 
 Open your browser and connect to the service with all parameters:
