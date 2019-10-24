@@ -28,4 +28,5 @@ Its also posible to create interesting overviews from a height website:
 
 ## Todo list
 - [ ] Parametervalidator Class
+- [ ] CMD generator Class
 - [ ] Errorhandling for none-reachable/http-statuscode/etc.
