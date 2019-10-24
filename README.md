@@ -1,5 +1,5 @@
 # Basic website screenshot webservice
-Start a simple webservice for taking screenshots of a website.
+Node.js script for start a simple webservice to taking screenshots of a website. (Windows only)
 
 ## Usage example
 Start the web-service in the CMD:
