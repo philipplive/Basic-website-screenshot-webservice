@@ -22,6 +22,7 @@ Its also posible to create interesting overviews from a height website:
 ## Installation
 * Install node.js 
 * Install Chrome
+* Create a private-key and self-signed-certificate for the webservice, insert these in the folder "cert"
 
 ## References
 [Headless chrome parameters](https://peter.sh/experiments/chromium-command-line-switches/)

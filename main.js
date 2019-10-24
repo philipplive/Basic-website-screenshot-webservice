@@ -19,8 +19,8 @@ class Main {
 	 */
 	startServer() {
 		let options = {
-			key: fs.readFileSync(__dirname + '/keys/private.key'),
-			cert: fs.readFileSync(__dirname + '/keys/certificate.cert')
+			key: fs.readFileSync(__dirname + '/cert/private.key'),
+			cert: fs.readFileSync(__dirname + '/cert/certificate.cert')
 		};
 
 		let server = https.createServer(options);
