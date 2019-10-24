@@ -7,10 +7,9 @@ const cmd = require('child_process');
 const os = require('os');
 
 /**
- * @link  https://peter.sh/experiments/chromium-command-line-switches/
- * @class  Core
+ * @class  Main
  */
-class Core {
+class Main {
 	constructor() {
 		this.startServer();
 	}
@@ -123,4 +122,4 @@ class Core {
 	}
 }
 
-let core = new Core();
+let main = new Main();

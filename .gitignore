@@ -1,5 +1,3 @@
-# ignore all . folders but include . files
 /.vscode/
 /keys/
-
 .gitignore

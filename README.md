@@ -1,5 +1,5 @@
 # Basic website screenshot webservice
-
+Start a simple webservice for taking screenshots of a website.
 
 ## Usage example
 Start the web-service in the CMD:
@@ -22,6 +22,9 @@ Its also posible to create interesting overviews from a height website:
 ## Installation
 * Install node.js 
 * Install Chrome
+
+## References
+[Headless chrome parameters](https://peter.sh/experiments/chromium-command-line-switches/)
 
 ## Todo list
 - [ ] Parametervalidator Class
