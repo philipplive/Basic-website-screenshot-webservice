@@ -1,24 +1,9 @@
-# H1
+# Basic website screenshot webservice
 
+## Installation
 
-Alt-H1
-======
-
-Alt-H2
-------
-
+## Usage example
 ```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
+https://[[YOURIP]]:5512/?url=http://thewebsite.ch/&width=1500&height=1500&secret=123456&zoom=0.1
 ```
-
-
-As Kanye West said:
-
-> We're living the future so
-> the present is our past.
-
-![Alt Text](preview.jpg)
+![Open the URL in a browser](preview.jpg)
