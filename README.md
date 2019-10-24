@@ -14,14 +14,14 @@ https://[[SERVICE-IP]]:5512/?url=http://thewebsite.ch/&width=1500&height=1500&se
 You should get the folowing output:
 ![Open the URL in a browser](preview.jpg)
 
+Its also posible to create interesting overviews from a height website:
+![Open the URL in a browser](preview-long.jpg)
+
 
 ## Installation
-
 * Install node.js 
 * Install Chrome
 
-## TODO list
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
+## Todo list
+- [ ] Parametervalidator Class
+- [ ] Errorhandling for none-reachable/http-statuscode/etc.
